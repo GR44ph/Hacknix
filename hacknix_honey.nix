@@ -1,6 +1,6 @@
 {config, lib, pkgs, options, ... }:
 let
-  user = "TestyMcTestFace";
+  user = "HONEYTHEME";
   home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/master.tar.gz";
   mod = "Mod4";
   title = "#FDE917";
@@ -21,32 +21,17 @@ in
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # RTL8821CE
-  boot.extraModulePackages = [ config.boot.kernelPackages.rtl8821ce ];
-
   networking.hostName = "${user}s-PC";
-  networking.networkmanager.enable = true;
 
-  networking.interfaces.eno1.useDHCP = true;
-  networking.interfaces.wlo1.useDHCP = true;
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF8";
-  console = {
-    font = "Lat2-Terminus16";
-    keyMap = "de";
-  };
-
-  # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
     displayManager.lightdm.enable = true;
-    displayManager = {
-      autoLogin = {
-        enable = true;
-        user = "${user}";
-      };
-    };
+#     displayManager = {
+#       autoLogin = {
+#         enable = true;
+#         user = "${user}";
+#       };
+#     };
     windowManager.i3 = {
       enable = true;
       package = pkgs.i3-gaps;
@@ -63,27 +48,9 @@ in
     };
   };
 
-  # Configure keymap in X11
-  services.xserver.layout = "de";
-
-  # Enable sound.
-  services.pipewire = {
-  enable = true;
-    alsa = {
-      enable = true;
-      support32Bit = true;
-    };
-  pulse.enable = true;
-  };
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  services.xserver.libinput.enable = true;
-  services.xserver.libinput.touchpad.naturalScrolling = true;
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.${user} = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "input" "display" "audio" "nixos" "docker" "networkmanager" ];
+    extraGroups = [ "wheel" "input" "display" "${user}" ];
   };
 
   home-manager.users.${user} = { config, lib, pkgs, ... }: {
@@ -254,13 +221,6 @@ in
       };
     };
   };
-
-    
-
-  # List packages installed in system profile. To search, run:
-  environment.systemPackages = with pkgs; [
-  ];
-
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
