@@ -1,5 +1,5 @@
 # Hacknix
-This is a NixOS configuration file that is meant to reproduce the visual style of the fictional operating system "HacknetOS" utilzing i3, polybar, dmenu, termite and picom, configured in HomeManager.
+This is a NixOS configuration file that is meant to reproduce the visual style of the fictional operating system "HacknetOS" utilzing i3, polybar, dmenu, termite and picom, configured with HomeManager.
 
 Different xservers (themes) can be applied by changing the color and wallpaper variables at the top of configuration.nix, the various wallpapers can be found online and the HEX color values can be picked from ingame screenshots, also available online.
 I will add (a link to) these to a list here later.
